@@ -20,7 +20,7 @@ namespace SB.Controllers
 				return gameControl;
 			else
 			{
-				GameObject obj = new GameObject("_gameController");
+				GameObject obj = new GameObject("GameController");
 				obj.tag = "Controller";
 				gameControl = obj.AddComponent<GameController>();
 				return gameControl;
@@ -71,6 +71,11 @@ namespace SB.Controllers
 		public void LostBalls()
 		{
 
+		}
+
+		public void TempSetLevel(int level)
+		{
+			LevelController.Get().SetLevel(level);
 		}
 
 		public void ExitGame()

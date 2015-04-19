@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using SB.InGameObjects;
 
 namespace SB.Controllers
 {
+	using SB.InGameObjects.Cells;
 	public class LevelController : MonoBehaviour
 	{
 		[SerializeField]
@@ -63,7 +65,8 @@ namespace SB.Controllers
 			curLevel = levelNumber-1;
 			if (levelNumber <= levelsGOs.Length)
 			{
-				Destroy(GameObject.FindObjectOfType(typeof(Level)));
+				Level l = FindObjectOfType(typeof(Level)) as Level;
+				if (l) Destroy(l.gameObject);
 				Instantiate(levelsGOs[curLevel]);
 			}
 			else
