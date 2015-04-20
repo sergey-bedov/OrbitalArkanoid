@@ -17,7 +17,7 @@ GameObject:
   - 50: {fileID: 5038808}
   - 60: {fileID: 6059848}
   m_Layer: 0
-  m_Name: TestBoard
+  m_Name: TestBoard(OLD)
   m_TagString: Board
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,7 +144,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Test Board (Blue)
   Description: This is the first Test Board for the first prototype.
-  Radius: 4.5
   Angle: 30
   Speed: 2
 --- !u!212 &21299284

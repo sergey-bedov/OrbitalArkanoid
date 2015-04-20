@@ -12,6 +12,8 @@ namespace SB.Controllers
 		private LevelController levelController;
 		private GuiController guiController;
 
+		public bool IsOnPause; // TODO
+
 		#region Access Instance Anywhere
 		private static GameController gameControl;
 		public static GameController Get()

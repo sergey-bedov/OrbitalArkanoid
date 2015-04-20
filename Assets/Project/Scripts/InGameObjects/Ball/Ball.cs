@@ -22,11 +22,16 @@ namespace SB.InGameObjects
 
 		void Start ()
 		{
+			// FOR NOW:
+			UnityEngine.UI.Slider SpeedSlider = GameObject.Find("BallSpeedSlider").GetComponent<UnityEngine.UI.Slider>();
+			Speed = Speed * SpeedSlider.value + 2F;
+
 			rigidBody.velocity = Vector3.down * Speed;
 		}
 		
 		void Update ()
 		{
+
 			if (OutOfGameArea())
 			{
 				BallController.Get().BallDestroyed(this);

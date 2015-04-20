@@ -47,7 +47,8 @@ namespace SB.Controllers
 			if (Time.timeScale > 0)
 			{
 				if (Input.anyKey) KeyboardControl();
-				if (Input.GetButton("Fire1")) MouseControl();
+			//	if (Input.GetButton("Fire1")) MouseControlOverScteenQuarter();
+				if (Input.GetButton("Fire1")) MouseControlOverScteenCircle();
 			}
 		}
 
@@ -60,14 +61,14 @@ namespace SB.Controllers
 			}
 		}
 
-		#region Mouse Control
+		#region Mouse Control Over Scteen Quarter
 
 		float mouseDistance = 0;
 		
 		private Vector3 lastPosition;
 		private bool trackMouse = false;
 		
-		void MouseControl ()
+		void MouseControlOverScteenQuarter ()
 		{
 			if (Input.GetButtonDown ("Fire1"))
 			{
@@ -126,6 +127,19 @@ namespace SB.Controllers
 			}
 		}
 
+		#endregion
+
+		#region Mouse Control Over Scteen Circle
+		private void MouseControlOverScteenCircle()
+		{
+			Vector3 newPosition = Input.mousePosition - (Vector3)halfScreen;
+			float angle = Vector3.Angle(newPosition, Vector3.down);
+			if (newPosition.x < 0) angle = -angle;
+			foreach (Board board in boards)
+			{
+				board.LerpBoard(angle);
+			}
+		}
 		#endregion
 
 	}
