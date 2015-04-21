@@ -42,13 +42,21 @@ namespace SB.Controllers
 		}
 		#endregion
 
+		public int ControlType = 3;
 		void Update ()
 		{
 			if (Time.timeScale > 0)
 			{
 				if (Input.anyKey) KeyboardControl();
-			//	if (Input.GetButton("Fire1")) MouseControlOverScteenQuarter();
-				if (Input.GetButton("Fire1")) MouseControlOverScteenCircle();
+				if (Input.GetButton("Fire1"))
+				{
+					if (ControlType == 1)
+						MouseControlOverScteenQuarter();
+					if (ControlType == 2)
+						MouseControlOverScteenCircleBoard();
+					if (ControlType == 3)
+						MouseControlOverScteenCircleRelative();
+				}
 			}
 		}
 
@@ -129,8 +137,8 @@ namespace SB.Controllers
 
 		#endregion
 
-		#region Mouse Control Over Scteen Circle
-		private void MouseControlOverScteenCircle()
+		#region Mouse Control Over Scteen Circle Board
+		private void MouseControlOverScteenCircleBoard()
 		{
 			Vector3 newPosition = Input.mousePosition - (Vector3)halfScreen;
 			float angle = Vector3.Angle(newPosition, Vector3.down);
@@ -142,5 +150,40 @@ namespace SB.Controllers
 		}
 		#endregion
 
+		#region Mouse Control Over Scteen Circle Relative
+		private float lastAngle;
+		private float newAngle;
+		private float angle;
+	//	private bool trackMouse = false;
+		void MouseControlOverScteenCircleRelative()
+		{
+			if (Input.GetButtonDown ("Fire1"))
+			{
+				trackMouse = true;
+				lastPosition = Input.mousePosition - (Vector3)halfScreen;
+				lastAngle = Vector3.Angle(lastPosition, Vector3.down);
+			}
+			
+			if (Input.GetButtonUp ("Fire1"))
+			{
+				trackMouse = false;
+			}
+			
+			if (trackMouse)
+			{
+				Vector3 newPosition = Input.mousePosition - (Vector3)halfScreen;
+				float newAngle = Vector3.Angle(newPosition, Vector3.down);
+				angle = newAngle - lastAngle;
+				print(angle);
+				lastAngle = newAngle;
+				if (newPosition.x < 0)
+					angle = - angle;
+			}
+			foreach (Board board in boards)
+			{
+				board.LerpBoardRelatively(angle);
+			}
+		}
+		#endregion
 	}
 }

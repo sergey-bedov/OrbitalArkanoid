@@ -80,6 +80,11 @@ namespace SB.Controllers
 			LevelController.Get().SetLevel(level);
 		}
 
+		public void TempSetControlType(int controlType)
+		{
+			BoardController.Get().ControlType = controlType;
+		}
+
 		public void ExitGame()
 		{
 			Debug.Log("ExitGame");

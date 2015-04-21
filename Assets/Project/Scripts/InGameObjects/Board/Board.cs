@@ -33,11 +33,13 @@ namespace SB.InGameObjects
 		public void LerpBoard (float angle)
 		{
 			float speed = 1000F * SpeedSlider.value + 5F; 
-		//	float lerpSpeed = speed / ( angle - trans.rotation.z );
-		//	float lerpAngle = Mathf.LerpAngle(trans.rotation.z, angle, lerpSpeed * Time.deltaTime);
-		//	transform.eulerAngles = new Vector3(0, 0, lerpAngle);
-
 			transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angle)), Time.deltaTime * speed);
+		}
+		public void LerpBoardRelatively (float angle)
+		{
+			float speed = 1000F * SpeedSlider.value + 5F;
+			print (transform.rotation.z);
+			transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, transform.eulerAngles.z	 + angle)), Time.deltaTime * speed);
 		}
 		public void ResetBoard ()
 		{

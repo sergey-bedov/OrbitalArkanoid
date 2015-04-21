@@ -7,11 +7,11 @@ PlayerSettings:
   AndroidProfiler: 0
   defaultScreenOrientation: 4
   targetDevice: 2
-  targetGlesGraphics: -1
+  targetGlesGraphics: 1
   targetIOSGraphics: -1
   targetResolution: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: SergeyBedov
   productName: cellkanoid
   cloudProjectId: 
   defaultCursor: {fileID: 0}
@@ -76,7 +76,7 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleIdentifier: com.sergeybedov.cellkanoid
-  bundleVersion: 0.0001
+  bundleVersion: 0.0003
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0

@@ -9,7 +9,7 @@ namespace SB.InGameObjects
 		public string Name;
 		public string Description;
 
-		public float Speed = 3F;
+		public float Speed = 8F;
 
 		private Rigidbody2D rigidBody;
 		private Transform trans;

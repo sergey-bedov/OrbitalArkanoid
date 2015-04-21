@@ -73,6 +73,7 @@ MonoBehaviour:
   Name: Test Brick Cell (Red)
   Description: This is the first Test Brick Cell for the first prototype.
   TheCellType: 0
+  Damage: 0
   CellStates:
   - {fileID: 21300000, guid: abf2054e49e0c2c49bbdd1f0cd50e362, type: 3}
   - {fileID: 21300000, guid: 3fad995cda626d548a36c3335843c61c, type: 3}
@@ -102,8 +103,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: -83014811
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 25a480b3c4cdb5c4b8c7d41f1c8c3c75, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
