@@ -9,7 +9,7 @@ namespace SB.InGameObjects
 		public string Description;
 		public float Angle = 0F;
 
-		public float Speed = 2F;
+		public float Speed = 5F;
 
 		private Transform trans;
 
@@ -24,12 +24,14 @@ namespace SB.InGameObjects
 			trans.rotation = Quaternion.AngleAxis(-angle, Vector3.back);
 
 		}
-		public void MoveBoard (float speed)
-		{
-			transform.RotateAround(Vector3.zero, Vector3.back, -speed);
-		}
 
 		public UnityEngine.UI.Slider SpeedSlider; // FOR NOW
+
+		public void MoveBoard (float speed)
+		{
+			transform.RotateAround(Vector3.zero, Vector3.back, -speed * SpeedSlider.value);
+		}
+
 		public void LerpBoard (float angle)
 		{
 			float speed = 1000F * SpeedSlider.value + 5F; 

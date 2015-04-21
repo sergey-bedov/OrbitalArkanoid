@@ -49,7 +49,7 @@ namespace SB.Controllers
 
 				// FOR NOW:
 				GameObject tempBall = Instantiate (Resources.Load("Prefabs/Balls/TestBall", typeof(GameObject))) as GameObject;
-				tempBall.transform.localScale = Random.Range(0.2F, 1F) * Vector3.one;
+				tempBall.transform.localScale = Random.Range(0.5F, 2F) * Vector3.one;
 			//	tempBall.GetComponent<Ball>().Speed = Random.Range(2F, 10F);
 			}
 		}

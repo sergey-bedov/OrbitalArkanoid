@@ -39,8 +39,8 @@ namespace SB.Controllers
 			{
 				levelsGOs = ArrayTools.PushLast(levelsGOs, levelGO);
 			}
-			curLevel = 1;
-			SetLevel(curLevel+1);
+			curLevel = 0;
+			SetLevel(3);
 		}
 		#endregion
 
