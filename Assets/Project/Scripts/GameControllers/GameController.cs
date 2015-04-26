@@ -7,6 +7,11 @@ namespace SB.Controllers
 {
 	public class GameController : MonoBehaviour 
 	{
+		public GameVariables TheGameVariables;
+
+		private MusicController musicController;
+		private SoundController soundController;
+
 		private BoardController boardController;
 		private BallController ballController;
 		private LevelController levelController;
@@ -30,14 +35,22 @@ namespace SB.Controllers
 		}
 		void Awake() 
 		{
+			Debug.Log(this.GetType());
+			DontDestroyOnLoad(transform.gameObject);
 			if( gameControl == null )
 				gameControl = this;
 			else
 				GameObject.Destroy( this.gameObject );
 
+			TheGameVariables = gameObject.AddComponent<GameVariables>();
+
+			musicController = MusicController.Get ();
+			soundController = SoundController.Get ();
+
+			//IsOnPause = true;
 			// If we load level with Board & Ball:
 			boardController = BoardController.Get();
-			ballController = BallController.Get();
+		//	ballController = BallController.Get();
 			levelController = LevelController.Get ();
 			guiController = GuiController.Get ();
 		}
@@ -47,27 +60,32 @@ namespace SB.Controllers
 		{
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
-				Pause();
+				PauseTrigger();
 			}
 		}
 
-		float timeScale = 1;
-		public void Pause ()
+		// float timeScale = 1;
+		public void PauseGame ()
 		{
-			// --- Deal with Menu Spawn ---
-
-
-			// --- Deal with Time Stop ---
-			if (Time.timeScale > 0)
+			BoardController.Get().Pause();
+			BallController.Get().Pause();
+		}
+		public void UnPauseGame ()
+		{
+			BoardController.Get().UnPause();
+			BallController.Get().UnPause();
+		}
+		public void PauseTrigger ()
+		{
+			IsOnPause = !IsOnPause;
+			if (IsOnPause)
 			{
-				timeScale = Time.timeScale;
-				Time.timeScale = 0;
+				UnPauseGame();
 			}
 			else
 			{
-				Time.timeScale = timeScale;
+				PauseGame();
 			}
-			GuiController.Get().ShowHidePauseMenu();
 		}
 
 		public void LostBalls()
@@ -85,6 +103,21 @@ namespace SB.Controllers
 			BoardController.Get().ControlType = controlType;
 		}
 
+		public void BackToLevelsMenu()
+		{
+			Cleanup();
+			Application.LoadLevel("LevelsMenu");
+		}
+		public void BackToMainMenu()
+		{
+			Cleanup();
+			Application.LoadLevel("MainMenu");
+		}
+		public void Cleanup()
+		{
+			BoardController.Get().Cleanup();
+			BallController.Get().Cleanup();
+		}
 		public void ExitGame()
 		{
 			Debug.Log("ExitGame");

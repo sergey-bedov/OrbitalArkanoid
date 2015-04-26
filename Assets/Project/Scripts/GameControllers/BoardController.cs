@@ -32,21 +32,38 @@ namespace SB.Controllers
 			else
 				GameObject.Destroy( this.gameObject );
 
-			boards = new Board[0];
-			foreach (GameObject boardGO in GameObject.FindGameObjectsWithTag("Board"))
-			{
-				Board board = boardGO.GetComponent<Board>();
-				boards = ArrayTools.PushLast(boards, board);
-			}
+			//GetBoards();
+
 			halfScreen = new Vector2( Screen.width/2, Screen.height/2 );
 		}
 		#endregion
 
+//		private void GetBoards()
+//		{
+//			boards = new Board[0];
+//			foreach (GameObject boardGO in GameObject.FindGameObjectsWithTag("Board"))
+//			{
+//				Board board = boardGO.GetComponent<Board>();
+//				boards = ArrayTools.PushLast(boards, board);
+//			}
+//		}
+
+		private bool isOnPause = false;
+		public void Pause()
+		{
+			isOnPause = true;
+		}
+		public void UnPause()
+		{
+			isOnPause = false;
+		}
+
 		public int ControlType = 3;
 		void Update ()
 		{
-			if (Time.timeScale > 0)
+			if (!isOnPause)
 			{
+//				if (boards == null) GetBoards();
 				if (Input.anyKey) KeyboardControl();
 				if (Input.GetButton("Fire1"))
 				{
@@ -63,10 +80,11 @@ namespace SB.Controllers
 		private void KeyboardControl ()
 		{
 			float h = Input.GetAxis("Horizontal");
-			foreach (Board board in boards)
-			{
-				board.MoveBoard(h*board.Speed);
-			}
+			if (boards != null)
+				foreach (Board board in boards)
+				{
+					board.MoveBoard(h*board.Speed);
+				}
 		}
 
 		#region Mouse Control Over Scteen Quarter
@@ -179,10 +197,27 @@ namespace SB.Controllers
 				if (newPosition.x < 0)
 					angle = - angle;
 			}
-			foreach (Board board in boards)
-			{
-				board.LerpBoardRelatively(angle);
-			}
+			if (boards != null)
+				foreach (Board board in boards)
+				{
+					board.LerpBoardRelatively(2*angle);
+				}
+		}
+		#endregion
+
+		#region Add/Remove Board from Array
+		public void BoardCreated(Board board)
+		{
+			if (boards == null) boards = new Board[0];
+			boards = ArrayTools.PushLast(boards, board);
+		}
+		public void BoardDestroyed(Board board)
+		{
+			boards = ArrayTools.Remove(boards, board);
+		}
+		public void Cleanup()
+		{
+			boards = new Board[0];
 		}
 		#endregion
 	}

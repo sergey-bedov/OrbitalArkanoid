@@ -32,14 +32,41 @@ namespace SB.Controllers
 				GameObject.Destroy( this.gameObject );
 
 			balls = new Ball[0];
-			foreach (GameObject ballGO in GameObject.FindGameObjectsWithTag("Ball"))
-			{
-				Ball ball = ballGO.GetComponent<Ball>();
-				balls = ArrayTools.PushLast(balls, ball);
-			}
 		}
 		#endregion
 
+		private bool isOnPause;
+		public void Pause()
+		{
+			isOnPause = true;
+			SetBallsVelocity(0);
+		}
+
+		public void UnPause()
+		{
+			isOnPause = false;
+			SetBallsVelocity(8);
+		}
+		public void SetBallsVelocity(Vector2 velocityVector)
+		{
+			foreach (Ball ball in balls)
+				ball.SetVelocity(velocityVector);
+		}
+		public void SetBallsVelocity(Vector3 velocityVector)
+		{
+			SetBallsVelocity((Vector2)velocityVector);
+		}
+		public void SetBallsVelocity(float velocity)
+		{
+			foreach (Ball ball in balls)
+				ball.SetVelocity(velocity);
+		}
+
+		#region Add/Remove Ball from Array
+		public void BallCreated(Ball ball)
+		{
+			balls = ArrayTools.PushLast(balls, ball);
+		}
 		public void BallDestroyed(Ball ball)
 		{
 			balls = ArrayTools.Remove(balls, ball);
@@ -49,9 +76,14 @@ namespace SB.Controllers
 
 				// FOR NOW:
 				GameObject tempBall = Instantiate (Resources.Load("Prefabs/Balls/TestBall", typeof(GameObject))) as GameObject;
-				tempBall.transform.localScale = Random.Range(0.5F, 2F) * Vector3.one;
+				tempBall.transform.localScale = Random.Range(0.7F, 0.7F) * Vector3.one;
 			//	tempBall.GetComponent<Ball>().Speed = Random.Range(2F, 10F);
 			}
 		}
+		public void Cleanup()
+		{
+			balls = new Ball[0];
+		}
+		#endregion
 	}
 }

@@ -39,48 +39,54 @@ namespace SB.Controllers
 			{
 				levelsGOs = ArrayTools.PushLast(levelsGOs, levelGO);
 			}
-			curLevel = 0;
-			SetLevel(3);
+		//	curLevel = 0;
+		//	SetLevel(3);
 		}
 		#endregion
 
 		// TODO Make PAUSE work as a boolean in GameController
+		public void StartLevel (int num)
+		{
+			if (Application.loadedLevelName != "GameLevel")
+				Application.LoadLevel("GameLevel");
+
+			StartCoroutine(StartLevelCountdown(num));
+		}
+		IEnumerator StartLevelCountdown(int num)
+		{
+			yield return new WaitForSeconds(3);
+			SetLevel(num);
+		}
 		public void StartLevel ()
 		{
-			//StartCoroutine(Countdown(3.0F)); 
+			StartLevel(curLevel);
 		}
-		/*
-		IEnumerator Countdown (float waitTime)
-		{
-			Time.timeScale = 0;
-			print (1);
-			yield return new WaitForSeconds(waitTime);
-			print ("GO !!!");
-			Time.timeScale = 1;
-		}
-		*/
 
 		public void SetLevel (int levelNumber)
 		{
-			curLevel = levelNumber-1;
 			if (levelNumber <= levelsGOs.Length)
 			{
 				Level l = FindObjectOfType(typeof(Level)) as Level;
 				if (l) Destroy(l.gameObject);
-				Instantiate(levelsGOs[curLevel]);
+				print ("LevelsQty: " + levelsGOs.Length + "; ChousenLevel: " + levelNumber);
+				Instantiate(levelsGOs[levelNumber]);
+				curLevel = levelNumber;
+				GuiController.Get().UpdateLevelInfo(levelsGOs[curLevel].GetComponent<Level>());
 			}
 			else
 			{
 				Debug.LogError("There is no Level #" + levelNumber + "!!! Max Number of Levels are " + levelsGOs.Length + ".");
 			}
-			GuiController.Get().UpdateLevelInfo(levelsGOs[curLevel].GetComponent<Level>());
-			StartLevel ();
 		}
 
 		public void NextLevel ()
 		{
-			SetLevel(curLevel + 1);
+			StartLevel(curLevel + 1);
 		}
 
+		public Level GetLevel(int num)
+		{
+			return levelsGOs[num].GetComponent<Level>();
+		}
 	}
 }

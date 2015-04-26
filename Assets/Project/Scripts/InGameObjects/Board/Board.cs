@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using SB.Controllers;
 
 namespace SB.InGameObjects
 {
@@ -17,6 +18,7 @@ namespace SB.InGameObjects
 		{
 			trans = GetComponent<Transform>();
 			ResetBoard();
+			BoardController.Get().BoardCreated(this);
 		}
 
 		public void PutBoard (float angle)

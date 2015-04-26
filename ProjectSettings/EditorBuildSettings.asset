@@ -5,5 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Project/Scenes/Main Branch/GameLevel.unity
   - enabled: 1
-    path: Assets/Project/Scenes/Test Branch/SB-Testing/SetupGameView1.unity
+    path: Assets/Project/Scenes/Main Branch/GameStart.unity
+  - enabled: 0
+    path: Assets/Project/Scenes/Main Branch/GameStart.unity
+  - enabled: 1
+    path: Assets/Project/Scenes/Main Branch/MainMenu.unity
+  - enabled: 1
+    path: Assets/Project/Scenes/Main Branch/LevelsMenu.unity
+  - enabled: 1
+    path: Assets/Project/Scenes/Main Branch/AboutUsMenu.unity
+  - enabled: 1
+    path: Assets/Project/Scenes/Main Branch/OptionsMenu.unity
+  - enabled: 1
+    path: Assets/Project/Scenes/Main Branch/GameLevel.unity
