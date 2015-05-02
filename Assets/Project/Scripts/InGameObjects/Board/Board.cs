@@ -42,7 +42,7 @@ namespace SB.InGameObjects
 		public void LerpBoardRelatively (float angle)
 		{
 			float speed = 1000F * SpeedSlider.value + 5F;
-			print (transform.rotation.z);
+//			print (transform.rotation.z);
 			transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, transform.eulerAngles.z	 + angle)), Time.deltaTime * speed);
 		}
 		public void ResetBoard ()

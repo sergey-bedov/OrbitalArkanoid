@@ -10,6 +10,9 @@ namespace SB.Controllers
 		private Board[] boards;
 		private Vector2 halfScreen;
 
+		private bool isKeepMoving;
+		private float keepMovingSpeed;
+
 		#region Access Instance Anywhere
 		private static BoardController boardControl;
 		public static BoardController Get()
@@ -35,6 +38,9 @@ namespace SB.Controllers
 			//GetBoards();
 
 			halfScreen = new Vector2( Screen.width/2, Screen.height/2 );
+
+			isKeepMoving = false;
+			keepMovingSpeed = 0;
 		}
 		#endregion
 
@@ -58,7 +64,7 @@ namespace SB.Controllers
 			isOnPause = false;
 		}
 
-		public int ControlType = 3;
+		public int ControlType = 0;
 		void Update ()
 		{
 			if (!isOnPause)
@@ -67,6 +73,8 @@ namespace SB.Controllers
 				if (Input.anyKey) KeyboardControl();
 				if (Input.GetButton("Fire1"))
 				{
+					if (ControlType == 0)
+						MouseControlArrows();
 					if (ControlType == 1)
 						MouseControlOverScteenQuarter();
 					if (ControlType == 2)
@@ -74,17 +82,35 @@ namespace SB.Controllers
 					if (ControlType == 3)
 						MouseControlOverScteenCircleRelative();
 				}
+				if (isKeepMoving)
+					MoveBoards(keepMovingSpeed);
 			}
 		}
 
 		private void KeyboardControl ()
 		{
 			float h = Input.GetAxis("Horizontal");
+			MoveBoards(h);
+		}
+		public void MoveBoards (float speed)
+		{
 			if (boards != null)
 				foreach (Board board in boards)
 				{
-					board.MoveBoard(h*board.Speed);
+					board.MoveBoard(speed*board.Speed);
 				}
+		}
+		public void ConstantMove (float speed)
+		{
+			keepMovingSpeed = speed;
+			if (speed == 0)
+				isKeepMoving = false;
+			else
+				isKeepMoving = true;
+		}
+		void MouseControlArrows()
+		{
+
 		}
 
 		#region Mouse Control Over Scteen Quarter
@@ -192,7 +218,7 @@ namespace SB.Controllers
 				Vector3 newPosition = Input.mousePosition - (Vector3)halfScreen;
 				float newAngle = Vector3.Angle(newPosition, Vector3.down);
 				angle = newAngle - lastAngle;
-				print(angle);
+//				print(angle);
 				lastAngle = newAngle;
 				if (newPosition.x < 0)
 					angle = - angle;

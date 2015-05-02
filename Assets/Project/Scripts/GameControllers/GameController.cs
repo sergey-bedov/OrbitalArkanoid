@@ -53,6 +53,7 @@ namespace SB.Controllers
 		//	ballController = BallController.Get();
 			levelController = LevelController.Get ();
 			guiController = GuiController.Get ();
+			TempSetControlType(0);
 		}
 		#endregion
 
@@ -98,9 +99,29 @@ namespace SB.Controllers
 			LevelController.Get().SetLevel(level);
 		}
 
+		private GameObject arrowsPanel;
 		public void TempSetControlType(int controlType)
 		{
+			print (controlType);
+			if (controlType == 0)
+			{
+				if (arrowsPanel == null) arrowsPanel = GameObject.Find("ControlsArrowsPanel");
+				if (arrowsPanel != null)
+					arrowsPanel.SetActive(true);
+			}
+			else
+			{
+				if (GameObject.Find("ControlsArrowsPanel") != null)
+					arrowsPanel = GameObject.Find("ControlsArrowsPanel");
+				arrowsPanel.SetActive(false);
+			}
 			BoardController.Get().ControlType = controlType;
+			print (arrowsPanel.name);
+		}
+
+		public void BoardConstantMove(float speed)
+		{
+			BoardController.Get().ConstantMove(speed);
 		}
 
 		public void BackToLevelsMenu()

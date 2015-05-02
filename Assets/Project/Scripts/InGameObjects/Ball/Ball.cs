@@ -9,7 +9,7 @@ namespace SB.InGameObjects
 		public string Name;
 		public string Description;
 
-		public float Speed = 4F;
+		public float Speed = 2F;
 
 		private Rigidbody2D rigidBody;
 
@@ -31,8 +31,12 @@ namespace SB.InGameObjects
 		void Start ()
 		{
 			// FOR NOW:
-			UnityEngine.UI.Slider SpeedSlider = GameObject.Find("BallSpeedSlider").GetComponent<UnityEngine.UI.Slider>();
-			Speed = Speed * SpeedSlider.value + 2F;
+			float sliderSpeed;
+			if (GameObject.Find("BallSpeedSlider") != null)
+				sliderSpeed = GameObject.Find("BallSpeedSlider").GetComponent<UnityEngine.UI.Slider>().value;
+			else
+				sliderSpeed = 0.5F;
+			Speed = Speed * sliderSpeed + 0.5F;
 
 			rigidBody.velocity = Vector3.down * Speed;
 		}
@@ -81,6 +85,7 @@ namespace SB.InGameObjects
 		//	if (coll.gameObject.tag == "Ball")
 		//	{
 			FaceDirection(rigidBody.velocity);
+			SetVelocity(Speed);
 		//	}
 		}
 	}
