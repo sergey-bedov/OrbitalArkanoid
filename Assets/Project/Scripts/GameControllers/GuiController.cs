@@ -5,9 +5,6 @@ namespace SB.Controllers
 {
 	public class GuiController : MonoBehaviour
 	{
-		private GameObject canvasBack;
-		private GameObject canvasFront;
-
 		public LevelInfoPanel levelInfoPanel;
 
 		public GameObject PauseMenu;
@@ -35,32 +32,26 @@ namespace SB.Controllers
 			else
 				GameObject.Destroy( this.gameObject );
 
-			InstantiateCanvas();
 
-			levelInfoPanel = FindObjectOfType(typeof(LevelInfoPanel)) as LevelInfoPanel;
 		}
 		#endregion
 
 		public void UpdateLevelInfo(Level level)
 		{
+			if (levelInfoPanel == null)
+				levelInfoPanel = FindObjectOfType(typeof(LevelInfoPanel)) as LevelInfoPanel;
 			levelInfoPanel.LevelNumber.text = level.Number.ToString();
 			levelInfoPanel.LevelName.text = level.Name;
 		//	levelInfoPanel.Score.text = level.Score.ToString();
 		//	levelInfoPanel.Lives.text = level.Lives.ToString();
 		}
 
-		private void InstantiateCanvas()
+		public Countdown BornCountdown ()
 		{
-			canvasBack = GameObject.Find("CanvasBack");
-			if (canvasBack == null)
-			{
-				canvasBack = Instantiate (Resources.Load("Prefabs/GUI/CanvasBack", typeof(GameObject))) as GameObject;
-			}
-			canvasFront = GameObject.Find("CanvasFront");
-			if (canvasFront == null)
-			{
-				canvasFront = Instantiate (Resources.Load("Prefabs/GUI/CanvasFront", typeof(GameObject))) as GameObject;
-			}
+			GameController.Get().PauseGame();
+			GameObject countdown = Instantiate (Resources.Load("Prefabs/GUI/Countdown", typeof(GameObject))) as GameObject;
+			countdown.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+			return countdown.GetComponent<Countdown>();
 		}
 
 		#region PauseMenu
@@ -75,8 +66,7 @@ namespace SB.Controllers
 		{
 			GameController.Get().PauseGame();
 			PauseMenu = Instantiate (Resources.Load("Prefabs/GUI/PauseMenu", typeof(GameObject))) as GameObject;
-			InstantiateCanvas();
-			PauseMenu.transform.SetParent(canvasFront.transform, false);
+			PauseMenu.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
 		}
 		private void HidePauseMenu ()
 		{

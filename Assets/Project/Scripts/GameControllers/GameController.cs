@@ -65,16 +65,17 @@ namespace SB.Controllers
 			}
 		}
 
-		// float timeScale = 1;
 		public void PauseGame ()
 		{
-			BoardController.Get().Pause();
-			BallController.Get().Pause();
+			IsOnPause = true;
+			BoardController.Get().OnPause();
+			BallController.Get().OnPause();
 		}
 		public void UnPauseGame ()
 		{
-			BoardController.Get().UnPause();
-			BallController.Get().UnPause();
+			IsOnPause = false;
+			BoardController.Get().OnUnpause();
+			BallController.Get().OnUnpause();
 		}
 		public void PauseTrigger ()
 		{

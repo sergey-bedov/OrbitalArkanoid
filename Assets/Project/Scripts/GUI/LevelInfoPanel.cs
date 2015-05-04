@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using SB.Controllers;
 
 public class LevelInfoPanel : MonoBehaviour
 {
@@ -21,6 +22,10 @@ public class LevelInfoPanel : MonoBehaviour
 	public void PapulatePanel(Level level)
 	{
 		PapulatePanel(level.Number, level.Name, level.Descripton);
+	}
+	void Start()
+	{
+		PapulatePanel(LevelController.Get().GetCurLevel());
 	}
 	#endregion
 }

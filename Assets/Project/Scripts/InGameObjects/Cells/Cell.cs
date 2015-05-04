@@ -2,8 +2,10 @@
 using System.Collections;
 using SB.Controllers;
 
+
 namespace SB.InGameObjects.Cells
 {
+
 	public enum CellType
 	{
 		Brick,
@@ -11,6 +13,7 @@ namespace SB.InGameObjects.Cells
 		Sector
 	}
 
+	[RequireComponent (typeof (Collider2D), typeof (Rigidbody2D))]
 	public class Cell : MonoBehaviour
 	{
 		public string Name;

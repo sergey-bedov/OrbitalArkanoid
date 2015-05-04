@@ -10,7 +10,7 @@ namespace SB.Controllers
 		private Board[] boards;
 		private Vector2 halfScreen;
 
-		private bool isKeepMoving;
+		public bool isKeepMoving;
 		private float keepMovingSpeed;
 
 		#region Access Instance Anywhere
@@ -54,20 +54,19 @@ namespace SB.Controllers
 //			}
 //		}
 
-		private bool isOnPause = false;
-		public void Pause()
+		public void OnPause()
 		{
-			isOnPause = true;
+
 		}
-		public void UnPause()
+		public void OnUnpause()
 		{
-			isOnPause = false;
+
 		}
 
 		public int ControlType = 0;
 		void Update ()
 		{
-			if (!isOnPause)
+			if (!GameController.Get().IsOnPause)
 			{
 //				if (boards == null) GetBoards();
 				if (Input.anyKey) KeyboardControl();
@@ -82,6 +81,7 @@ namespace SB.Controllers
 					if (ControlType == 3)
 						MouseControlOverScteenCircleRelative();
 				}
+				Debug.Log("BoardController.boards.Length == " + boards.Length);
 				if (isKeepMoving)
 					MoveBoards(keepMovingSpeed);
 			}
@@ -95,13 +95,20 @@ namespace SB.Controllers
 		public void MoveBoards (float speed)
 		{
 			if (boards != null)
+			{
 				foreach (Board board in boards)
 				{
 					board.MoveBoard(speed*board.Speed);
 				}
+			}
+			else
+				Debug.Log("BoardController.boards == null !!!");
+			if (boards.Length == 0)
+				Debug.Log("There are no 'boards' in BoardController.boards !!!");
 		}
 		public void ConstantMove (float speed)
 		{
+			print ("ConstantMove speed = " + speed);
 			keepMovingSpeed = speed;
 			if (speed == 0)
 				isKeepMoving = false;

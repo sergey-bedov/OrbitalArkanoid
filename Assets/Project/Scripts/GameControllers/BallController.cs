@@ -35,16 +35,13 @@ namespace SB.Controllers
 		}
 		#endregion
 
-		private bool isOnPause;
-		public void Pause()
+		public void OnPause()
 		{
-			isOnPause = true;
 			SetBallsVelocity(0);
 		}
 
-		public void UnPause()
+		public void OnUnpause()
 		{
-			isOnPause = false;
 			SetBallsVelocity(8);
 		}
 		public void SetBallsVelocity(Vector2 velocityVector)

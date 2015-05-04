@@ -24,7 +24,7 @@ namespace SB.InGameObjects
 			Director.transform.SetParent(transform);
 
 			trans = Director.GetComponent<Transform>();
-			FaceDirection(rigidBody.velocity);
+			FaceDirection(Vector3.down);
 			BallController.Get().BallCreated(this);
 		}
 
@@ -38,7 +38,9 @@ namespace SB.InGameObjects
 				sliderSpeed = 0.5F;
 			Speed = Speed * sliderSpeed + 0.5F;
 
-			rigidBody.velocity = Vector3.down * Speed;
+			if (!GameController.Get().IsOnPause)
+				rigidBody.velocity = trans.up * Speed;
+
 		}
 
 		public void SetVelocity(Vector2 velocityVector)

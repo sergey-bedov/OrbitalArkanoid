@@ -9,8 +9,7 @@ namespace SB.Controllers
 	{
 		[SerializeField]
 		private GameObject[] levelsGOs;
-		[SerializeField]
-		private int curLevel;
+		public int CurLevelNum;
 		
 		#region Access Instance Anywhere
 		private static LevelController levelControl;
@@ -39,12 +38,9 @@ namespace SB.Controllers
 			{
 				levelsGOs = ArrayTools.PushLast(levelsGOs, levelGO);
 			}
-		//	curLevel = 0;
-		//	SetLevel(3);
 		}
 		#endregion
 
-		// TODO Make PAUSE work as a boolean in GameController
 		public void StartLevel (int num)
 		{
 			if (Application.loadedLevelName != "GameLevel")
@@ -54,12 +50,23 @@ namespace SB.Controllers
 		}
 		IEnumerator StartLevelCountdown(int num)
 		{
-			yield return new WaitForSeconds(3);
+			yield return new WaitForSeconds(0.01F); // To Make Level appear
+			Countdown countdown = GuiController.Get().BornCountdown();
+			countdown.SetLevelNumName(GetLevel(num));
+			countdown.SetCountdown ("3");
+			yield return new WaitForSeconds(1F);
+			countdown.SetCountdown ("2");
+			yield return new WaitForSeconds(1F);
+			countdown.SetCountdown ("1");
+			yield return new WaitForSeconds(1F);
+			countdown.SetCountdown ("GO");
+			yield return new WaitForSeconds(1F);
+			countdown.KillCountdown();
 			SetLevel(num);
 		}
 		public void StartLevel ()
 		{
-			StartLevel(curLevel);
+			StartLevel(CurLevelNum);
 		}
 
 		public void SetLevel (int levelNumber)
@@ -70,8 +77,8 @@ namespace SB.Controllers
 				if (l) Destroy(l.gameObject);
 				print ("LevelsQty: " + levelsGOs.Length + "; ChousenLevel: " + levelNumber);
 				Instantiate(levelsGOs[levelNumber]);
-				curLevel = levelNumber;
-				GuiController.Get().UpdateLevelInfo(levelsGOs[curLevel].GetComponent<Level>());
+				CurLevelNum = levelNumber;
+				GuiController.Get().UpdateLevelInfo(levelsGOs[CurLevelNum].GetComponent<Level>());
 			}
 			else
 			{
@@ -81,12 +88,17 @@ namespace SB.Controllers
 
 		public void NextLevel ()
 		{
-			StartLevel(curLevel + 1);
+			StartLevel(CurLevelNum + 1);
 		}
+
 
 		public Level GetLevel(int num)
 		{
 			return levelsGOs[num].GetComponent<Level>();
+		}
+		public Level GetCurLevel()
+		{
+			return GetLevel(CurLevelNum);
 		}
 	}
 }
