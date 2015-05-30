@@ -55,7 +55,10 @@ namespace SB.InGameObjects.Cells
 					//DAMAGE The Block
 					Damage++;
 					//spriteRenderer.sprite = CellStates[Damage];
-					spriteRenderer.material.SetTexture("_BgTex", CellStates[Damage].texture);
+					if (spriteRenderer.material.shader.name == "Sprites/Default")
+						spriteRenderer.sprite = CellStates[Damage];
+					else
+						spriteRenderer.material.SetTexture("_BgTex", CellStates[Damage].texture);
 				}
 				else // IF DESTROYED
 				{

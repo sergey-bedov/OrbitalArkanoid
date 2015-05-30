@@ -64,6 +64,7 @@ public class Level : MonoBehaviour
 	{
 		Debug.Log("Level Completed. " + BlocksLeft + "/" + BlocksTotal);
 		if ((Number == GameVariables.TopLevel) && (Number != GameVariables.MaxLevel)) GameVariables.TopLevel++;
+	//	BallController.Get().
 		GameVariables.CurrentLevel++;
 		LevelController.Get().NextLevel();
 	}

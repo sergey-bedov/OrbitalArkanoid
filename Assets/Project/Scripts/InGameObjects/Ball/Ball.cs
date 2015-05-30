@@ -35,16 +35,7 @@ namespace SB.InGameObjects
 
 		void Start ()
 		{
-			// FOR NOW:
-			float sliderSpeed;
-			if (GameObject.Find("BallSpeedSlider") != null)
-				sliderSpeed = GameObject.Find("BallSpeedSlider").GetComponent<UnityEngine.UI.Slider>().value;
-			else
-				sliderSpeed = 0.5F;
-			Speed = Speed * sliderSpeed + 0.5F;
-
-			if (!GameController.Get().IsOnPause)
-				rigidBody.velocity = trans.up * Speed;
+			ResetBall();
 
 		}
 
@@ -96,6 +87,21 @@ namespace SB.InGameObjects
 			SetVelocity(Speed);
 			particleMoveTest.GetComponent<ParticleSystem>().Clear();
 		//	}
+		}
+		public void ResetBall()
+		{
+			// FOR NOW:
+			trans.position = new Vector3(0, -3.29F, 0);
+		//	trans.rotation = Quaternion.SetLookRotation(Vector3.down);
+			float sliderSpeed;
+			if (GameObject.Find("BallSpeedSlider") != null)
+				sliderSpeed = GameObject.Find("BallSpeedSlider").GetComponent<UnityEngine.UI.Slider>().value;
+			else
+				sliderSpeed = 0.5F;
+			Speed = Speed * sliderSpeed + 0.5F;
+			
+			if (!GameController.Get().IsOnPause)
+				rigidBody.velocity = trans.up * Speed;
 		}
 	}
 }

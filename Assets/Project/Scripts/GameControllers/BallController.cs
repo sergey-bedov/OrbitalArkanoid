@@ -82,5 +82,12 @@ namespace SB.Controllers
 			balls = new Ball[0];
 		}
 		#endregion
+		public void ResetBalls()
+		{
+			foreach (Ball ball in balls)
+			{
+				ball.ResetBall();
+			}
+		}
 	}
 }
