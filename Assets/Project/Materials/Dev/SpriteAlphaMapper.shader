@@ -21,14 +21,13 @@
  
          struct vertexInput {
             float4 vertex : POSITION;
-            float4 texcoord : TEXCOORD0;
-            float2 texcoord1 : TEXCOORD1;
+            float2 uv_maintex : TEXCOORD0;
+            float2 uv2_bgtex : TEXCOORD1;
             float4 color : COLOR;
          };
          struct vertexOutput {
             float4 vertex : POSITION;
-            float4 texcoord : TEXCOORD0;
-            float2 texcoord1 : TEXCOORD1;
+            float2 uv_output : TEXCOORD0;
             float4 color : COLOR;
          };
  
@@ -36,15 +35,14 @@
          {
             vertexOutput output;
             output.vertex = mul(UNITY_MATRIX_MVP, input.vertex);
-            output.texcoord = input.texcoord;
-            output.texcoord1 = input.texcoord1;
+            output.uv_output = input.uv2_bgtex;
             output.color = input.color;
             return output;
          }
          
-         float4 frag(vertexOutput input) : COLOR
+         float4 frag(vertexOutput output) : COLOR
          {
-         	float4 mainTexColor = tex2D(_MainTex, input.texcoord.xy);
+         	float4 mainTexColor = tex2D(_MainTex, output.uv_output.xy);
             if (mainTexColor.a == 0)
             {
                discard;
@@ -56,7 +54,7 @@
             	else
             		return _MyColor;
             }
-            float4 bgTexColor = tex2D(_BgTex, input.texcoord1.xy);
+            float4 bgTexColor = tex2D(_BgTex, output.uv_output.xy);
             return bgTexColor;
          }
  

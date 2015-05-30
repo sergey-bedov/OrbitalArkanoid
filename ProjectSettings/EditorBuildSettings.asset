@@ -21,3 +21,5 @@ EditorBuildSettings:
     path: Assets/Project/Scenes/Main Branch/OptionsMenu.unity
   - enabled: 1
     path: Assets/Project/Scenes/Main Branch/GameLevel.unity
+  - enabled: 1
+    path: Assets/Project/Scenes/Main Branch/TheEnd.unity

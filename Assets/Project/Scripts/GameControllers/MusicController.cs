@@ -29,7 +29,6 @@ namespace SB.Controllers
 		}
 		void Awake() 
 		{
-			Debug.Log(this.GetType());
 			DontDestroyOnLoad(transform.gameObject);
 			if( musicControl == null )
 				musicControl = this;
@@ -38,8 +37,8 @@ namespace SB.Controllers
 
 			audioSource = GetComponent<AudioSource>();
 			audioSource.clip = MusicArray[Random.Range(0,MusicArray.Length)];
-			audioSource.volume = GameController.Get ().TheGameVariables.Music;
-			if (!GameController.Get ().TheGameVariables.Mute)
+			audioSource.volume = GameVariables.Music;
+			if (!GameVariables.Mute)
 				audioSource.Play();
 		}
 
@@ -48,12 +47,12 @@ namespace SB.Controllers
 
 			if (Application.loadedLevelName == "OptionsMenu")
 			{
-				bool isMute = GameController.Get ().TheGameVariables.Mute;
+				bool isMute = GameVariables.Mute;
 				if (isMute && audioSource.isPlaying)
 					audioSource.Stop();
 				if (!isMute && !audioSource.isPlaying)
 					audioSource.Play();
-				audioSource.volume = GameController.Get ().TheGameVariables.Music;
+				audioSource.volume = GameVariables.Music;
 			}
 		}
 		#endregion

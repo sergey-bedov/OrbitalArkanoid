@@ -36,7 +36,7 @@ namespace SB.Controllers
 			
 			audioSource = GetComponent<AudioSource>();
 			audioSource.clip = SoundArray[0];
-			audioSource.volume = GameController.Get ().TheGameVariables.SoundEffects;
+			audioSource.volume = GameVariables.SoundEffects;
 		}
 		#endregion
 		public void PlaySound(int clipNumber)

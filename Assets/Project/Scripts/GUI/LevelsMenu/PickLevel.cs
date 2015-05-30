@@ -9,17 +9,16 @@ public class PickLevel : MonoBehaviour
 
 	void Awake()
 	{
-		int topLevel = GameController.Get().TheGameVariables.TopLevel;
 
 		if (Application.loadedLevelName != "GameLevel")
 			for (int i = 0; i < LevelsButtons.Length; i++)
 			{
-				if (i <= topLevel)
+				if (i <= GameVariables.TopLevel)
 					LevelsButtons[i].interactable = true;
 				else
 					LevelsButtons[i].interactable = false;
 			}
-		ChouseLevel(topLevel);
+		ChouseLevel(GameVariables.TopLevel);
 	}
 
 	float doubleClickStart = -1F;
@@ -35,6 +34,7 @@ public class PickLevel : MonoBehaviour
 		{
 			Debug.Log("Single Clicked!");
 			PapulateLevelPanel(num);
+			PapulateHumanPanel(num);
 			doubleClickStart = Time.time;
 		}
 	}
@@ -44,8 +44,15 @@ public class PickLevel : MonoBehaviour
 			FindObjectOfType<LevelPanel>().PapulatePanel(LevelController.Get().GetLevel(num));
 	//	print ("PickLevel | ChouseLevel(" + num + "))");
 	}
+	public void PapulateHumanPanel(int num)
+	{
+		if (FindObjectOfType<HumanPanel>() != null)
+			FindObjectOfType<HumanPanel>().PapulatePanel(num);
+	}
 	public void LaunchLevel (int num)
 	{
+		Application.LoadLevel("GameLevel");
+		GameVariables.CurrentLevel = num;
 		LevelController.Get().StartLevel(num);
 	}
 }

@@ -7,7 +7,7 @@ namespace SB.Controllers
 {
 	public class GameController : MonoBehaviour 
 	{
-		public GameVariables TheGameVariables;
+	//	public GameVariables TheGameVariables;
 
 		private MusicController musicController;
 		private SoundController soundController;
@@ -35,14 +35,15 @@ namespace SB.Controllers
 		}
 		void Awake() 
 		{
-			Debug.Log(this.GetType());
+			DontDestroyOnLoad(transform.gameObject);
 			DontDestroyOnLoad(transform.gameObject);
 			if( gameControl == null )
 				gameControl = this;
 			else
 				GameObject.Destroy( this.gameObject );
 
-			TheGameVariables = gameObject.AddComponent<GameVariables>();
+			GameVariables.LoadProgress();
+			GameVariables.LoadOptions();
 
 			musicController = MusicController.Get ();
 			soundController = SoundController.Get ();
@@ -61,7 +62,8 @@ namespace SB.Controllers
 		{
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
-				PauseTrigger();
+				guiController.PauseMenuTrigger();
+			//	PauseTrigger();
 			}
 		}
 
@@ -103,7 +105,6 @@ namespace SB.Controllers
 		private GameObject arrowsPanel;
 		public void TempSetControlType(int controlType)
 		{
-			print (controlType);
 			if (controlType == 0)
 			{
 				if (arrowsPanel == null) arrowsPanel = GameObject.Find("ControlsArrowsPanel");
@@ -117,7 +118,6 @@ namespace SB.Controllers
 				arrowsPanel.SetActive(false);
 			}
 			BoardController.Get().ControlType = controlType;
-			print (arrowsPanel.name);
 		}
 
 		public void BoardConstantMove(float speed)
@@ -140,10 +140,23 @@ namespace SB.Controllers
 			BoardController.Get().Cleanup();
 			BallController.Get().Cleanup();
 		}
+		public void TheEnd()
+		{
+			Cleanup();
+		//	Application.LoadLevel("TheEnd");
+			Application.LoadLevel("AboutUsMenu");
+		}
 		public void ExitGame()
 		{
 			Debug.Log("ExitGame");
 			Application.Quit();
+		}
+
+		void OnDestroy ()
+		{
+			Debug.Log("GAME VARIABLES DELETED\nSaving Variables to PlayerPrefs.");
+			GameVariables.SaveProgress();
+			GameVariables.SaveOptions();
 		}
 
 	}

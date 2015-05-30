@@ -19,7 +19,8 @@ public class Countdown : MonoBehaviour
 	}
 	public void SetLevelNumName(Level level)
 	{
-		LevelNameText.text = "#" + level.Number + ". " + level.Name;
+		if (level != null)
+			LevelNameText.text = "#" + level.Number + ". " + level.Name;
 	}
 	public void SetCountdown(string countText)
 	{

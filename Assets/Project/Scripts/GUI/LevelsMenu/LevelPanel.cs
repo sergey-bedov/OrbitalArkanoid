@@ -18,6 +18,8 @@ public class LevelPanel : MonoBehaviour
 	public void StartTheLevel()
 	{
 		int levelNum = int.Parse(levelInfoPanel.LevelNumber.text);
+		Debug.Log("Load Scene: GameLevel;");
+		Application.LoadLevel("GameLevel");
 		LevelController.Get().StartLevel(levelNum);
 
 	}

@@ -8,6 +8,10 @@ TagManager:
   - Ball
   - Controller
   - Canvas
+  - GUI-LevelNumber
+  - GUI-Score
+  - GUI-LevelName
+  - GUI-Lives
   layers:
   - Default
   - TransparentFX
@@ -50,4 +54,10 @@ TagManager:
     locked: 0
   - name: GUI
     uniqueID: 1852176525
+    locked: 0
+  - name: Later
+    uniqueID: 2595047263
+    locked: 0
+  - name: Latest
+    uniqueID: 2945013461
     locked: 0

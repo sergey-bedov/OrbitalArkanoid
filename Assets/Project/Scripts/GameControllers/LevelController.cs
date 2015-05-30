@@ -28,6 +28,7 @@ namespace SB.Controllers
 		}
 		void Awake() 
 		{
+			DontDestroyOnLoad(transform.gameObject);
 			if( levelControl == null )
 				levelControl = this;
 			else
@@ -36,34 +37,34 @@ namespace SB.Controllers
 			levelsGOs = new GameObject[0];
 			foreach(GameObject levelGO in Resources.LoadAll("Prefabs/Levels", typeof(GameObject)))
 			{
-				levelsGOs = ArrayTools.PushLast(levelsGOs, levelGO);
+				if (levelGO.GetComponent<Level>().Number < 100)
+					levelsGOs = ArrayTools.PushLast(levelsGOs, levelGO);
 			}
 		}
 		#endregion
 
 		public void StartLevel (int num)
 		{
-			if (Application.loadedLevelName != "GameLevel")
-				Application.LoadLevel("GameLevel");
+			CurLevelNum = num;
+			if (num < levelsGOs.Length)
+			{
+				StartCoroutine(StartLevelCountdown());
+			}
+			else //if (num == levelsGOs.Length)
+			{
+				GameController.Get().TheEnd();
+			}
 
-			StartCoroutine(StartLevelCountdown(num));
 		}
-		IEnumerator StartLevelCountdown(int num)
+		IEnumerator StartLevelCountdown()
 		{
-			yield return new WaitForSeconds(0.01F); // To Make Level appear
-			Countdown countdown = GuiController.Get().BornCountdown();
-			countdown.SetLevelNumName(GetLevel(num));
-			countdown.SetCountdown ("3");
-			yield return new WaitForSeconds(1F);
-			countdown.SetCountdown ("2");
-			yield return new WaitForSeconds(1F);
-			countdown.SetCountdown ("1");
-			yield return new WaitForSeconds(1F);
-			countdown.SetCountdown ("GO");
-			yield return new WaitForSeconds(1F);
-			countdown.KillCountdown();
-			SetLevel(num);
+		//	Application.LoadLevel("GameLevel");
+			while (Application.loadedLevelName != "GameLevel")
+				yield return new WaitForEndOfFrame();
+			print ("Start Level Num " + CurLevelNum);
+			SetLevel (CurLevelNum);
 		}
+
 		public void StartLevel ()
 		{
 			StartLevel(CurLevelNum);
@@ -71,14 +72,15 @@ namespace SB.Controllers
 
 		public void SetLevel (int levelNumber)
 		{
-			if (levelNumber <= levelsGOs.Length)
+			if (levelNumber < levelsGOs.Length)
 			{
 				Level l = FindObjectOfType(typeof(Level)) as Level;
 				if (l) Destroy(l.gameObject);
 				print ("LevelsQty: " + levelsGOs.Length + "; ChousenLevel: " + levelNumber);
 				Instantiate(levelsGOs[levelNumber]);
-				CurLevelNum = levelNumber;
-				GuiController.Get().UpdateLevelInfo(levelsGOs[CurLevelNum].GetComponent<Level>());
+				GameObject.Find("PanelCenter").GetComponent<UnityEngine.UI.Image>().sprite = levelsGOs[levelNumber].GetComponent<Level>().BackgroundImage;
+				// CurLevelNum = levelNumber;
+				GuiController.Get().UpdateLevelInfo(levelsGOs[levelNumber].GetComponent<Level>());
 			}
 			else
 			{
@@ -94,7 +96,12 @@ namespace SB.Controllers
 
 		public Level GetLevel(int num)
 		{
-			return levelsGOs[num].GetComponent<Level>();
+			if (num < levelsGOs.Length)
+				return levelsGOs[num].GetComponent<Level>();
+			else
+			{
+				return null;
+			}
 		}
 		public Level GetCurLevel()
 		{

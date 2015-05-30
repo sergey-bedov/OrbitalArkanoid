@@ -81,7 +81,7 @@ namespace SB.Controllers
 					if (ControlType == 3)
 						MouseControlOverScteenCircleRelative();
 				}
-				Debug.Log("BoardController.boards.Length == " + boards.Length);
+//				Debug.Log("BoardController.boards.Length == " + boards.Length);
 				if (isKeepMoving)
 					MoveBoards(keepMovingSpeed);
 			}
@@ -100,11 +100,13 @@ namespace SB.Controllers
 				{
 					board.MoveBoard(speed*board.Speed);
 				}
+				if (boards.Length == 0)
+					Debug.Log("There are no 'boards' in BoardController.boards !!!");
 			}
 			else
-				Debug.Log("BoardController.boards == null !!!");
-			if (boards.Length == 0)
-				Debug.Log("There are no 'boards' in BoardController.boards !!!");
+			{
+		//		Debug.Log("BoardController.boards == null !!!");
+			}
 		}
 		public void ConstantMove (float speed)
 		{
@@ -113,7 +115,9 @@ namespace SB.Controllers
 			if (speed == 0)
 				isKeepMoving = false;
 			else
+			{
 				isKeepMoving = true;
+			}
 		}
 		void MouseControlArrows()
 		{

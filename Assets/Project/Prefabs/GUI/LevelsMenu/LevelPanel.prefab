@@ -324,6 +324,7 @@ MonoBehaviour:
   LevelName: {fileID: 11465064}
   LevelDesc: {fileID: 11444618}
   Score: {fileID: 0}
+  RecordScore: {fileID: 0}
   Lives: {fileID: 0}
 --- !u!114 &11444618
 MonoBehaviour:

@@ -22,8 +22,14 @@ public class Level : MonoBehaviour
 	void Awake ()
 	{
 		// TODO rename Cell into Block
+		if (Number != GameVariables.CurrentLevel) LevelController.Get().StartLevel(GameVariables.CurrentLevel);
 		BlocksTotal = GetComponentsInChildren<Cell>().Length;
-		UpdateBlocksLeft();
+		StartCoroutine(StartLevelCountdown());
+	}
+	void Start ()
+	{
+		print ("Start level #" + Number + " '" + Name + "'" + "; Cur Scene: " + Application.loadedLevelName);
+		if (Application.loadedLevelName == "GameLevel") UpdateBlocksLeft();
 	}
 	public void UpdateBlocksLeft()
 	{
@@ -31,9 +37,34 @@ public class Level : MonoBehaviour
 		if (BlocksLeft == 0)
 			LevelCompleted();
 	}
+
+	IEnumerator StartLevelCountdown()
+	{
+		print ("----- Started StartLevelCoroutine -----");
+		
+	//	yield return new WaitForSeconds(0.01F); // To Make Level appear
+	//	LevelController.Get().SetLevel(Number);
+
+		Countdown countdown;
+		countdown = GuiController.Get().BornCountdown();
+		countdown.SetLevelNumName(Name);
+		countdown.SetCountdown ("3");
+		yield return new WaitForSeconds(1F);
+		countdown.SetCountdown ("2");
+		yield return new WaitForSeconds(1F);
+		countdown.SetCountdown ("1");
+		yield return new WaitForSeconds(1F);
+		countdown.SetCountdown ("GO");
+		yield return new WaitForSeconds(1F);
+		countdown.KillCountdown();
+		print ("----- Finished StartLevelCoroutine -----");
+	}
+
 	private void LevelCompleted()
 	{
+		Debug.Log("Level Completed. " + BlocksLeft + "/" + BlocksTotal);
+		if ((Number == GameVariables.TopLevel) && (Number != GameVariables.MaxLevel)) GameVariables.TopLevel++;
+		GameVariables.CurrentLevel++;
 		LevelController.Get().NextLevel();
-		Debug.Log("Level Completed.");
 	}
 }

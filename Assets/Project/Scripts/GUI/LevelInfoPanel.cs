@@ -10,14 +10,16 @@ public class LevelInfoPanel : MonoBehaviour
 	public Text LevelDesc;
 
 	public Text Score;
+	public Text RecordScore;
 	public Text Lives;
 
 	#region Papulate methods
 	public void PapulatePanel(int num, string name, string desc)
 	{
 		LevelNumber.text = num.ToString();
-		LevelName.text = name;
-		LevelDesc.text = desc;
+		if (LevelName)
+			LevelName.text = name;
+		if (LevelDesc != null) LevelDesc.text = desc;
 	}
 	public void PapulatePanel(Level level)
 	{

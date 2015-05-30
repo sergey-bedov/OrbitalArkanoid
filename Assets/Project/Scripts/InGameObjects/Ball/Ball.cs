@@ -15,6 +15,8 @@ namespace SB.InGameObjects
 
 		public Transform trans;
 
+		private GameObject particleMoveTest;
+
 		void Awake ()
 		{
 			rigidBody = GetComponent<Rigidbody2D>();
@@ -22,6 +24,9 @@ namespace SB.InGameObjects
 			Director.transform.position = transform.position;
 			Director.transform.rotation = transform.rotation;
 			Director.transform.SetParent(transform);
+			particleMoveTest = Instantiate (Resources.Load("Prefabs/Effects/ParticleMoveTest", typeof(GameObject))) as GameObject;
+			particleMoveTest.transform.position = Director.transform.position;
+			particleMoveTest.transform.SetParent(Director.transform);
 
 			trans = Director.GetComponent<Transform>();
 			FaceDirection(Vector3.down);
@@ -86,8 +91,10 @@ namespace SB.InGameObjects
 		{
 		//	if (coll.gameObject.tag == "Ball")
 		//	{
+			print("Ball Collided! Bounce with Speed of " + Speed);
 			FaceDirection(rigidBody.velocity);
 			SetVelocity(Speed);
+			particleMoveTest.GetComponent<ParticleSystem>().Clear();
 		//	}
 		}
 	}

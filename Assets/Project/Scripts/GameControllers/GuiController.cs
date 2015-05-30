@@ -41,7 +41,8 @@ namespace SB.Controllers
 			if (levelInfoPanel == null)
 				levelInfoPanel = FindObjectOfType(typeof(LevelInfoPanel)) as LevelInfoPanel;
 			levelInfoPanel.LevelNumber.text = level.Number.ToString();
-			levelInfoPanel.LevelName.text = level.Name;
+			if (levelInfoPanel.LevelName)
+				levelInfoPanel.LevelName.text = level.Name;
 		//	levelInfoPanel.Score.text = level.Score.ToString();
 		//	levelInfoPanel.Lives.text = level.Lives.ToString();
 		}
@@ -49,9 +50,16 @@ namespace SB.Controllers
 		public Countdown BornCountdown ()
 		{
 			GameController.Get().PauseGame();
-			GameObject countdown = Instantiate (Resources.Load("Prefabs/GUI/Countdown", typeof(GameObject))) as GameObject;
-			countdown.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
-			return countdown.GetComponent<Countdown>();
+			if (FindObjectOfType(typeof(Countdown)))
+			{
+				return (Countdown)FindObjectOfType(typeof(Countdown));
+			}
+			else
+			{
+				GameObject countdown = Instantiate (Resources.Load("Prefabs/GUI/Countdown", typeof(GameObject))) as GameObject;
+				countdown.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+				return countdown.GetComponent<Countdown>();
+			}
 		}
 
 		#region PauseMenu

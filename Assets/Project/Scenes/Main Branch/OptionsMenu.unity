@@ -168,52 +168,48 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22440902, guid: 1d32ec294501f56499c8e18c132a7719, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22440902, guid: 1d32ec294501f56499c8e18c132a7719, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22451758, guid: 1d32ec294501f56499c8e18c132a7719, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22451758, guid: 1d32ec294501f56499c8e18c132a7719, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22451758, guid: 1d32ec294501f56499c8e18c132a7719, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22466008, guid: 1d32ec294501f56499c8e18c132a7719, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22466008, guid: 1d32ec294501f56499c8e18c132a7719, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22478340, guid: 1d32ec294501f56499c8e18c132a7719, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22478340, guid: 1d32ec294501f56499c8e18c132a7719, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22478340, guid: 1d32ec294501f56499c8e18c132a7719, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11464214, guid: 1d32ec294501f56499c8e18c132a7719, type: 2}
-      propertyPath: Sound
+      propertyPath: TopLevelText
       value: 
-      objectReference: {fileID: 666411032}
-    - target: {fileID: 11464214, guid: 1d32ec294501f56499c8e18c132a7719, type: 2}
-      propertyPath: Music
-      value: 
-      objectReference: {fileID: 1666735140}
+      objectReference: {fileID: 1595015677}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d32ec294501f56499c8e18c132a7719, type: 2}
   m_IsPrefabParent: 0
@@ -356,12 +352,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
---- !u!114 &666411032 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11463014, guid: 1d32ec294501f56499c8e18c132a7719,
-    type: 2}
-  m_PrefabInternal: {fileID: 100770939}
-  m_Script: {fileID: -113659843, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &746761235
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,12 +501,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &1666735140 stripped
+--- !u!114 &1595015677 stripped
 MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11453590, guid: 1d32ec294501f56499c8e18c132a7719,
+  m_PrefabParentObject: {fileID: 11491492, guid: 1d32ec294501f56499c8e18c132a7719,
     type: 2}
   m_PrefabInternal: {fileID: 100770939}
-  m_Script: {fileID: -113659843, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &1832047013
 GameObject:
   m_ObjectHideFlags: 0

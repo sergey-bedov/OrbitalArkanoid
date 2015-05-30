@@ -33,7 +33,8 @@ namespace SB.InGameObjects.Cells
 			spriteRenderer = GetComponent<SpriteRenderer>();
 			if (CellStates.Length > 0)
 			{
-				spriteRenderer.sprite = CellStates[Damage];
+			//	spriteRenderer.sprite = CellStates[Damage];
+				spriteRenderer.material.SetTexture("_BgTex", CellStates[Damage].texture);
 			}
 			audioSource = gameObject.AddComponent<AudioSource>();
 		}
@@ -53,7 +54,8 @@ namespace SB.InGameObjects.Cells
 
 					//DAMAGE The Block
 					Damage++;
-					spriteRenderer.sprite = CellStates[Damage];
+					//spriteRenderer.sprite = CellStates[Damage];
+					spriteRenderer.material.SetTexture("_BgTex", CellStates[Damage].texture);
 				}
 				else // IF DESTROYED
 				{
@@ -64,10 +66,17 @@ namespace SB.InGameObjects.Cells
 						audioSource.PlayOneShot(SoundController.Get().GetSound());
 
 					//DESTROY The Block
-					gameObject.SetActive(false);
-					gameObject.GetComponentInParent<Level>().UpdateBlocksLeft(); // Update Level Progress Info
+					StartCoroutine(CrashTheBlock());
 				}
 			}
+		}
+		IEnumerator CrashTheBlock() // TODO make block crash amimations or something like that
+		{
+			GameObject particleBoomTest = Instantiate (Resources.Load("Prefabs/Effects/ParticleBoomTest", typeof(GameObject))) as GameObject;
+			particleBoomTest.transform.position = this.transform.position;
+			yield return new WaitForSeconds(0.2F);
+			gameObject.SetActive(false);
+			gameObject.GetComponentInParent<Level>().UpdateBlocksLeft(); // Update Level Progress Info
 		}
 	}
 }

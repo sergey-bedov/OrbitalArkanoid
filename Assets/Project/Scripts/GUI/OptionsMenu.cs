@@ -10,14 +10,15 @@ namespace SB.Controllers
 		public Toggle Mute;
 		public Slider Sound;
 		public Slider Music;
+		public Text TopLevelText;
 		#endregion
 
-		private GameVariables gv;
+	//	private GameVariables gv;
 
 		void Awake()
 		{
 			Debug.Log(this.GetType());
-			gv = GameController.Get().TheGameVariables;
+		//	gv = GameController.Get().TheGameVariables;
 			LoadVariables();
 		}
 
@@ -28,26 +29,31 @@ namespace SB.Controllers
 
 		void LoadVariables()
 		{
-			Mute.isOn = gv.Mute;
-			Sound.value = gv.SoundEffects;
-			Music.value = gv.Music;
+			Mute.isOn = GameVariables.Mute;
+			Sound.value = GameVariables.SoundEffects;
+			Music.value = GameVariables.Music;
+			TopLevelText.text = ""+GameVariables.TopLevel;
 		}
 		void UpdateVariables()
 		{
-			gv.Mute = Mute.isOn;
-			gv.SoundEffects = Sound.value;
-			gv.Music = Music.value;
+			GameVariables.Mute = Mute.isOn;
+			GameVariables.SoundEffects = Sound.value;
+			GameVariables.Music = Music.value;
+		}
+		public void ResetOptions()
+		{
+			GameVariables.ResetOptions();
+			LoadVariables();
+		}
+		public void ResetProgress()
+		{
+			GameVariables.ResetProgress();
+			LoadVariables();
 		}
 		void SaveVariables()
 		{
 			UpdateVariables();
-			gv.SaveOptions();
-		}
-
-		void OnDestroy()
-		{
-			gv.Mute = Mute.isOn;
-			SaveVariables();
+			GameVariables.SaveOptions();
 		}
 	}
 }

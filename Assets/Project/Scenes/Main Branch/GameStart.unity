@@ -185,7 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guiDepth: 0
   levelToLoad: MainMenu
-  splashLogo: {fileID: 2800000, guid: da9f189e5dd66ac4b874487b64b42e98, type: 3}
+  splashLogo: {fileID: 2800000, guid: 0f8142e0faa536e40badd67767e512db, type: 3}
   fadeSpeed: .300000012
   waitTime: .200000003
   waitForInput: 0

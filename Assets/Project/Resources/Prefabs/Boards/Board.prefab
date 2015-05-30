@@ -42,7 +42,7 @@ Transform:
   m_GameObject: {fileID: 115866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -4, z: 0}
-  m_LocalScale: {x: 1, y: .800000012, z: 1}
+  m_LocalScale: {x: 1, y: .600000024, z: 1}
   m_Children: []
   m_Father: {fileID: 486942}
   m_RootOrder: 0
@@ -52,7 +52,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 130556}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: -1.62920685e-07}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -87,22 +87,16 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Points:
     m_Paths:
-    - - {x: .51115799, y: .489447713}
-      - {x: -.488829195, y: .490130901}
-      - {x: -.713997185, y: .442667276}
-      - {x: -.824720383, y: .373626113}
-      - {x: -.914224744, y: .271550536}
-      - {x: -.968294084, y: .177550361}
-      - {x: -.989354968, y: .0661854893}
-      - {x: -.989106119, y: -.401582569}
-      - {x: -.915158212, y: -.49031648}
-      - {x: .912856162, y: -.489447713}
-      - {x: .989354849, y: -.419342697}
-      - {x: .988325477, y: .0928165317}
-      - {x: .973277569, y: .16357255}
-      - {x: .919614255, y: .272375315}
-      - {x: .817884386, y: .377499968}
-      - {x: .69018954, y: .446392238}
+    - - {x: .888578355, y: .328908741}
+      - {x: .711954236, y: .435638428}
+      - {x: .485803992, y: .479455382}
+      - {x: -.52622509, y: .497974157}
+      - {x: -.767818213, y: .421593189}
+      - {x: -.915024161, y: .291051865}
+      - {x: -.976863563, y: .104721785}
+      - {x: -.994413197, y: -.450655609}
+      - {x: .98882705, y: -.48789978}
+      - {x: .994413257, y: .0875294209}
 --- !u!114 &11424234
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -116,8 +110,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Test Board (Blue)
   Description: This is the first Test Board for the first prototype.
-  Angle: 30
-  Speed: 2
+  Angle: 180
+  Speed: 10
+  SpeedSlider: {fileID: 0}
 --- !u!212 &21290762
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -128,7 +123,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: d154d540c9fa33e46b5a7e9c852aea8b, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
