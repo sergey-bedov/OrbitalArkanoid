@@ -84,6 +84,8 @@ namespace SB.Controllers
 //				Debug.Log("BoardController.boards.Length == " + boards.Length);
 				if (isKeepMoving)
 					MoveBoards(keepMovingSpeed);
+				else
+					StopBoards();
 			}
 		}
 
@@ -115,12 +117,36 @@ namespace SB.Controllers
 		//		Debug.Log("BoardController.boards == null !!!");
 			}
 		}
+		private float stopMovingTime = 0;
+		private float curMaxStopSpeed = 0;
+		public void StopBoards ()
+		{
+			if (boards != null)
+			{
+				foreach (Board board in boards)
+				{
+					curSpeed = Mathf.Lerp(curMaxStopSpeed, 0, (Time.time - stopMovingTime) * 2F);
+					board.MoveBoard(curSpeed);
+					print (Time.time - stopMovingTime);
+				}
+				if (boards.Length == 0)
+					Debug.Log("There are no 'boards' in BoardController.boards !!!");
+			}
+			else
+			{
+				//		Debug.Log("BoardController.boards == null !!!");
+			}
+		}
 		public void ConstantMove (float speed)
 		{
 			print ("ConstantMove speed = " + speed);
 			keepMovingSpeed = speed;
 			if (speed == 0)
+			{
 				isKeepMoving = false;
+				stopMovingTime = Time.time;
+				curMaxStopSpeed = curSpeed;
+			}
 			else
 			{
 				isKeepMoving = true;

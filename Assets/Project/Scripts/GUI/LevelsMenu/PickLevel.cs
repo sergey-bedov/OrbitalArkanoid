@@ -26,6 +26,7 @@ public class PickLevel : MonoBehaviour
 	{
 		if ((Time.time - doubleClickStart) < 0.3f)
 		{
+			GameVariables.CurrentLevel = num;
 			Debug.Log("Double Clicked!");
 			this.LaunchLevel(num);
 			doubleClickStart = -1;
@@ -33,6 +34,7 @@ public class PickLevel : MonoBehaviour
 		else
 		{
 			Debug.Log("Single Clicked!");
+			GameVariables.CurrentLevel = num;
 			PapulateLevelPanel(num);
 			PapulateHumanPanel(num);
 			doubleClickStart = Time.time;
