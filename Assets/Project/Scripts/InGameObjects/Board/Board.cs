@@ -31,7 +31,7 @@ namespace SB.InGameObjects
 
 		public void MoveBoard (float speed)
 		{
-			transform.RotateAround(Vector3.zero, Vector3.back, -speed * SpeedSlider.value);
+			transform.RotateAround(Vector3.zero, Vector3.back, -speed * Speed * SpeedSlider.value);
 		}
 
 		public void LerpBoard (float angle)

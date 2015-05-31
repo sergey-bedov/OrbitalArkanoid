@@ -92,6 +92,7 @@ namespace SB.InGameObjects
 		{
 			// FOR NOW:
 			trans.position = new Vector3(0, -3.29F, 0);
+			FaceDirection(Vector3.down);
 		//	trans.rotation = Quaternion.SetLookRotation(Vector3.down);
 			float sliderSpeed;
 			if (GameObject.Find("BallSpeedSlider") != null)

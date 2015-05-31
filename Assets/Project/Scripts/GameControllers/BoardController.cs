@@ -90,15 +90,22 @@ namespace SB.Controllers
 		private void KeyboardControl ()
 		{
 			float h = Input.GetAxis("Horizontal");
+			if (Input.GetKeyDown(KeyCode.LeftArrow)) startMovingTime = Time.time;
+			if (Input.GetKeyDown(KeyCode.RightArrow)) startMovingTime = Time.time;
 			MoveBoards(h);
 		}
+		private float startMovingTime = 0;
+		private float curSpeed = 0;
 		public void MoveBoards (float speed)
 		{
 			if (boards != null)
 			{
 				foreach (Board board in boards)
 				{
-					board.MoveBoard(speed*board.Speed);
+					curSpeed = Mathf.Lerp(0, speed*2, (Time.time - startMovingTime) * 0.5F);
+				//	board.MoveBoard(speed*board.Speed);
+					board.MoveBoard(curSpeed);
+					print (Time.time - startMovingTime);
 				}
 				if (boards.Length == 0)
 					Debug.Log("There are no 'boards' in BoardController.boards !!!");
@@ -117,6 +124,7 @@ namespace SB.Controllers
 			else
 			{
 				isKeepMoving = true;
+				startMovingTime = Time.time;
 			}
 		}
 		void MouseControlArrows()

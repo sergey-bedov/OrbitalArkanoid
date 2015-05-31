@@ -1442,7 +1442,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Number: 3
   Name: Stomach
-  Descripton: Level description.
+  Descripton: Be carefull with Hot and unhealthy food.
   BackgroundImage: {fileID: 21300000, guid: 5b8dbe5ba090f2e489c815248d84d66f, type: 3}
   LevelImage: {fileID: 21300000, guid: ddc388bb9a88c1147ac4d34d1b6b0819, type: 3}
   BlocksTotal: 0

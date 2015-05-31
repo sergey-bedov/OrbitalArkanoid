@@ -1607,7 +1607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Number: 1
   Name: Eye
-  Descripton: Level description.
+  Descripton: Don't watch TV to much.
   BackgroundImage: {fileID: 21300000, guid: 3192a875f750f8e4e93965a6a3d34fe1, type: 3}
   LevelImage: {fileID: 21300000, guid: e7b560e883414b047af0bc5b27ae5f67, type: 3}
   BlocksTotal: 0

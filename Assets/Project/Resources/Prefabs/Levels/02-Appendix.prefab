@@ -678,7 +678,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Number: 2
   Name: Appendix
-  Descripton: Level description.
+  Descripton: Don't eat to much sunflower seeds.
   BackgroundImage: {fileID: 21300000, guid: f8c3dad9a2cc4bc40b51e55d4f10e98d, type: 3}
   LevelImage: {fileID: 21300000, guid: 4e28f9c23e9b7f341b0d154f40ba50d7, type: 3}
   BlocksTotal: 0
