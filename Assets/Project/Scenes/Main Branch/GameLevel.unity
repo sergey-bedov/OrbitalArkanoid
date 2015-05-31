@@ -2631,11 +2631,11 @@ MonoBehaviour:
 
     Author: Segey Bedov
 
-    Build: 0.0022
+    Build: 0.0023
 
     Date: 05/31/2015
 
-    Description: Axeleration controls, all the levels are ugly but there.'
+    Description: Flip controls buttons.'
 --- !u!222 &838337546
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4023,11 +4023,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 155892, guid: e2636d954f9d6e94d966cb9b330b2b7b, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 178842, guid: e2636d954f9d6e94d966cb9b330b2b7b, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11489748, guid: e2636d954f9d6e94d966cb9b330b2b7b, type: 2}
       propertyPath: delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
@@ -4044,6 +4044,30 @@ Prefab:
     - target: {fileID: 11407286, guid: e2636d954f9d6e94d966cb9b330b2b7b, type: 2}
       propertyPath: delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
       value: -.300000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 125140, guid: e2636d954f9d6e94d966cb9b330b2b7b, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 147686, guid: e2636d954f9d6e94d966cb9b330b2b7b, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22406696, guid: e2636d954f9d6e94d966cb9b330b2b7b, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22448966, guid: e2636d954f9d6e94d966cb9b330b2b7b, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22406696, guid: e2636d954f9d6e94d966cb9b330b2b7b, type: 2}
+      propertyPath: m_AnchorMin.x
+      value: .779999971
+      objectReference: {fileID: 0}
+    - target: {fileID: 22448966, guid: e2636d954f9d6e94d966cb9b330b2b7b, type: 2}
+      propertyPath: m_AnchorMin.x
+      value: .779999971
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e2636d954f9d6e94d966cb9b330b2b7b, type: 2}
