@@ -9,6 +9,11 @@ public class LevelPanel : MonoBehaviour
 	public LevelInfoPanel levelInfoPanel;
 	public Button StartLevelButton;
 
+	void Awake ()
+	{
+		PapulatePanel(LevelController.Get().GetLevel(GameVariables.TopLevel));
+	}
+
 	public void PapulatePanel(Level level)
 	{
 		LevelImage.sprite = level.LevelImage;

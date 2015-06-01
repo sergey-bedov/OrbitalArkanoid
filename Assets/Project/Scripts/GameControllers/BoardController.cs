@@ -69,7 +69,7 @@ namespace SB.Controllers
 			if (!GameController.Get().IsOnPause)
 			{
 //				if (boards == null) GetBoards();
-				if (Input.anyKey) KeyboardControl();
+			//	if (true) KeyboardControl();
 				if (Input.GetButton("Fire1"))
 				{
 					if (ControlType == 0)
@@ -82,19 +82,42 @@ namespace SB.Controllers
 						MouseControlOverScteenCircleRelative();
 				}
 //				Debug.Log("BoardController.boards.Length == " + boards.Length);
+				KeyboardControl();
 				if (isKeepMoving)
+				{
 					MoveBoards(keepMovingSpeed);
+				}
 				else
-					StopBoards();
+					if (curSpeed > 0) StopBoards();
 			}
 		}
 
+		private Controls controls;
 		private void KeyboardControl ()
 		{
 			float h = Input.GetAxis("Horizontal");
-			if (Input.GetKeyDown(KeyCode.LeftArrow)) startMovingTime = Time.time;
-			if (Input.GetKeyDown(KeyCode.RightArrow)) startMovingTime = Time.time;
-			MoveBoards(h);
+			if (Input.GetKeyDown(KeyCode.LeftArrow)) startMovingTime = Time.time; // for Axeleration
+			if (Input.GetKeyDown(KeyCode.RightArrow)) startMovingTime = Time.time;  // for Axeleration
+			if (Input.GetKeyUp(KeyCode.LeftArrow)) stopMovingTime = Time.time;  // for stopping Axeleration
+			if (Input.GetKeyUp(KeyCode.RightArrow)) stopMovingTime = Time.time;  // for stopping Axeleration
+			MoveBoards(h * 0.3F);
+
+			float v = Input.GetAxis("Vertical");
+			if (Input.GetKeyDown(KeyCode.DownArrow)) startMovingTime = Time.time;  // for Axeleration
+			if (Input.GetKeyDown(KeyCode.UpArrow)) startMovingTime = Time.time;  // for Axeleration
+			if (Input.GetKeyUp(KeyCode.DownArrow)) stopMovingTime = Time.time;  // for stopping Axeleration
+			if (Input.GetKeyUp(KeyCode.UpArrow)) stopMovingTime = Time.time;  // for stopping Axeleration
+			MoveBoards(v * 0.3F);
+
+			// --- Light Buttons when controls using kewboard
+			if (Application.loadedLevelName == "GameLevel" && controls == null)
+				controls = FindObjectOfType(typeof(Controls)) as Controls;
+			if (controls && (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow)))
+				controls.MoveCW();
+			else if (controls && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow)))
+			    controls.MoveCCW();
+			else
+				controls.Idle();
 		}
 		private float startMovingTime = 0;
 		private float curSpeed = 0;
@@ -107,7 +130,7 @@ namespace SB.Controllers
 					curSpeed = Mathf.Lerp(0, speed*2, (Time.time - startMovingTime) * 0.5F);
 				//	board.MoveBoard(speed*board.Speed);
 					board.MoveBoard(curSpeed);
-					print (Time.time - startMovingTime);
+				//	print (Time.time - startMovingTime);
 				}
 				if (boards.Length == 0)
 					Debug.Log("There are no 'boards' in BoardController.boards !!!");
@@ -119,15 +142,16 @@ namespace SB.Controllers
 		}
 		private float stopMovingTime = 0;
 		private float curMaxStopSpeed = 0;
+		public float BoardsStopSpeed = 10F;
 		public void StopBoards ()
 		{
 			if (boards != null)
 			{
 				foreach (Board board in boards)
 				{
-					curSpeed = Mathf.Lerp(curMaxStopSpeed, 0, (Time.time - stopMovingTime) * 2F);
+					curSpeed = Mathf.Lerp(curMaxStopSpeed, 0, (Time.time - stopMovingTime) * BoardsStopSpeed);
 					board.MoveBoard(curSpeed);
-					print (Time.time - stopMovingTime);
+				//	print (Time.time - stopMovingTime);
 				}
 				if (boards.Length == 0)
 					Debug.Log("There are no 'boards' in BoardController.boards !!!");

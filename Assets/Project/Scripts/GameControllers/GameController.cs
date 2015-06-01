@@ -62,7 +62,14 @@ namespace SB.Controllers
 		{
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
-				guiController.PauseMenuTrigger();
+				if (Application.loadedLevelName == "GameLevel")
+					guiController.PauseMenuTrigger();
+				else if (Application.loadedLevelName == "LevelsMenu" 
+				         || Application.loadedLevelName == "AboutUsMenu" 
+				         || Application.loadedLevelName == "OptionsMenu")
+					BackToMainMenu();
+				else
+					ExitGame();
 			//	PauseTrigger();
 			}
 		}

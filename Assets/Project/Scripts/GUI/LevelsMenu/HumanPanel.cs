@@ -24,6 +24,8 @@ public class HumanPanel : MonoBehaviour
 		levels = new System.Collections.Generic.List<Image[]>();
 		levels.Add(Level_01); levels.Add(Level_02); levels.Add(Level_03); levels.Add(Level_04); levels.Add(Level_05);
 		levels.Add(Level_06); levels.Add(Level_07); levels.Add(Level_08); levels.Add(Level_09); levels.Add(Level_10);
+
+		PapulatePanel(GameVariables.TopLevel);
 	}
 
 	public void PapulatePanel(int num)

@@ -2630,11 +2630,11 @@ MonoBehaviour:
 
     Author: Segey Bedov
 
-    Build: 0.0024
+    Build: 0.0025
 
-    Date: 05/31/2015
+    Date: 06/01/2015
 
-    Description: Lerp Board Stop. Added Renal Level.'
+    Description: Improved keyboard controls. Fixed transitions between menus.'
 --- !u!222 &838337546
 CanvasRenderer:
   m_ObjectHideFlags: 0
